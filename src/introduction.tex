@@ -1,27 +1,24 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-The introduction motivates your work and puts it into a bigger context.
-It should answer the following questions:
-What is the background of this work?
-What is the state of the art?
-Why is this project necessary to advance the state of the art?
-What are the problems that have to be solved and why are they difficult?
-What are your contributions to solve these problems?
-How do you evaluate your solution to show that it is adequate and applicable?
+For decades, medical ultrasound has been a cornerstone of diagnostics imaging with broad clinical and preclinical applications, valued for its real-time capabilities, non-ionizing nature and relatively low cost.\cite{CompressedDrori2021} Continuous innovation, from new imaging and processing techniques to portable hardware and sophisticated software, ensures its central role in fields including oncology, cardiology, brain imaging, obstretics\cite{DualNyayapathi2024}, emergency medicine and many more. As technology advances, the demand for higher resolution and more sophisticated imaging modes constantly pushes system designers to capture more data with an ever-increasing number of channels and higher sampling rates. The management of these massive datastreams strains the limits of acquisition, real-time processing and transmission in ultrasound-based imaging modalities. Addressing this data-rate bottle neck is therefore a critical step in enabling future innovations.
 
-An introduction written along these questions naturally follows the \textit{\gls{spse}}\footnote{%
-  The \acrshort{spse} approach was established in a book~\cite{Hoey83}, but is also briefly summarized in a more recent article~\cite{MP12}, which is available online.
-} approach.
-In the \emph{situation}, you set the scene for your work and catch the interest of the readers by showing the importance and generality of the scene.
-In the \emph{problem}, you spot an issue in the scene and show why and how it significantly taints the scene.
-In the \emph{solution}, you outline your solution to that issue.
-Finally, in the \emph{evaluation}, you present the main arguments why the claimed solution actually does solve the problem.
+Data-rate reduction, respectively data compression in general can be approached from a variety of different angles. We can broadly categorise them in two classes: \textbf{Lossy} and \textbf{lossless} compression.
 
-In the following chapters, you will elaborate each of the four \gls{spse} elements in detail:
-In \textsl{Background}, you lay the foundations for an in-depth understanding of the situation and the problem.
-In \textsl{Related Work}, you show how others have address this (or similar) problems and why their solutions are not sufficient or applicable.
-In \textsl{Implementation}, you specify your solution, which you then evaluate rigorously for strengths and weaknesses in \textsl{Results}.
+Prior work on lossy methods has shown that very high compression ratios can be achieved by transforming the ultrasound signal into another domain and intelligently discarding information that is deemed less important, respectively considered to be noise. For instance, Drori et al.\cite{CompressDrori2021} have proposed a novel beamforming algorithm in the frequency domain that is equivalent to time domain DAS. This, combined with compressed sensing techniques and sub-Nyquist sampling allows them to filter and massively compress the ultrasound data by exploiting the finite rate of innovation (FRI) structure of the beamformed data.
 
-At the end of the introduction, you should explicitly show this structure to the reader by briefly explaining how this report is organized.
-Instead of using the general \gls{spse} terminology and the chapter names mentioned above, we urge you to use the domain-specific terminology established in the introduction and point to chapters using cross references (e.g., refering to \cref{ch:background} instead of ``the Background chapter'').
+Similar techniques based on the Discrete Wavelet Transform (DWT) can efficiently denoise and significantly reduce the dimensionality of medical imaging data by thresholding small wavelet coefficients. In the landscape of lossy compression algorithms, the DWT shows distinguished potential due to the following characteristics: It contains information about the signal in time and frequency domain simultaneously and it is able to solve the three problems noisiness, excessive storage space and low information content.\cite{RNS-BasedNagornov2022} These properties make it a promising paradigm for further work on resource constrained systems.
+
+% intro to listentolight
+
+However, the ListenToLight research platform, which this thesis is based on, has very high bandwidth capabilities and computational power. Hence, this system is not required to achieve compression ratios that are as high as possible, it should rather provide the highest quality data possible. This requirement rules out the data reduction techniques mentioned above, as they are inherently lossy. Furthermore, since ListenToLight is a research platform, the type of reconstruction should not be restricted as for example in the frequency domain beamforming approach mentioned earlier.
+
+The main goal of this thesis is to present a lossless data-rate reduction algorithm such that 
+
+% put QASA as future work in section 6
+
+% main goal of this thesis.
+
+
+
+%s that of the data-rate bottleneck in US imaging. The formation of a US image requires large amounts of data due mostly to two factors: High sampling rates, multiples or even magnitudes of order beyond the Nyquist rate to ensure high resolution beamforming, and a large number of data channels (and corresponding receivers), typically tens to hundreds, to enable high spatial resolution. These high data rates constrain advanced processing algorithms and portable hardware
