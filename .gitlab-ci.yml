@@ -1,0 +1,22 @@
+stages:
+    - pdf
+    - archive
+
+pdf:
+    stage: pdf
+    script:
+        - make all
+    artifacts:
+        paths:
+            - report.pdf
+
+archive:
+    stage: archive
+    script:
+        - make report.tar.gz report.zip
+    artifacts:
+        paths:
+            - report.tar.gz
+            - report.zip
+    dependencies:
+        - pdf
